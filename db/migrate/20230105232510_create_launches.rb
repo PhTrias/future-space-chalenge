@@ -18,8 +18,16 @@ class CreateLaunches < ActiveRecord::Migration[7.0]
       t.boolean :webcast_live
       t.string :image
       t.string :infographic
-      t.date :imported_t
       t.string :import_status
+      t.json :launch_service_provider
+      t.json :rocket
+      t.json :pad
+      t.json :mission
+      t.json :program
+      t.json :status
+      t.string :import_id
+      t.string :last_import_code
+      t.date :imported_t
 
       t.timestamps
     end

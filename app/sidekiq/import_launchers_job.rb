@@ -1,7 +1,9 @@
-class ImportLaunchersDataRoutine
+class ImportLaunchersJob
+  include Sidekiq::Job
   include ImportLaunchersDataLogics
+  sidekiq_options queue: 'import', retry: false
 
-  def run
+  def perform
     set_instance_variables
 
     loop do

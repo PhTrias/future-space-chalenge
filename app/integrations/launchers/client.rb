@@ -4,11 +4,8 @@ module Launchers
   class Client
     include HTTParty
 
-    ENDPOINT = 'https://ll.thespacedevs.com/2.0.0/launch/'
-    private_constant :ENDPOINT
-
-    def get(params)
-      self.class.get(ENDPOINT, query: params)
+    def get(url, params)
+      self.class.get(url, query: params)
     end
   end
 end
