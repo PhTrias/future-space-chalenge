@@ -1,19 +1,13 @@
 class ImportLaunchersDataRoutine
-  def self.import_data
-    @params = { limit: 100, offset: 1 }
-    @service = Launchers::Service.new
-    # acessar o endpoint que traz os dados #100
-    service = create_launchers
+  include ImportLaunchersDataLogics
 
-    if service[:page] <= '2000'
-      @params[:offset] += 1
+  def run
+    set_instance_variables
 
-      import_data
+    loop do
+      response = import_data
+
+      break if response[:error].present? || page_limit(@url) >= 2100
     end
-  end
-
-  def self.create_launchers
-    launchers_data = @service.import_data(@params)
-    response = ImportLaunchersService.call(launchers_data)
   end
 end
