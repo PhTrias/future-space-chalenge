@@ -1,28 +1,39 @@
 class ImportLaunchersService < ApplicationService
-  def initialize(launchers_data)
-    @launchers_data = launchers_data
+  attr_accessor :launcher_data
+
+  def initialize(launcher_data)
+    @launcher_data = launcher_data
   end
 
   def call
-    create_launchers
+    @launcher = Launch.find_or_initialize_by(
+      import_id: launcher_data['id'],
+      slug: launcher_data['slug']
+    )
+
+    create_launcher if @launcher.new_record?
+    update_launcher if @launcher.need_update?(launcher_data.to_json)
   end
 
   private
 
-  def create_launchers
-    Rails.logger('####### Creating Launchers')
+  def create_launcher
+    attributes = launcher_data.except('id', 'slug')
+    @launcher.attributes = attributes
+    @launcher.last_import_code = Digest::MD5.hexdigest(launcher_data.to_json)
 
-    @launchers_data['results'].each do |data|
-      launch = Launch.new(data)
+    return if @launcher.save
 
-      if launch.save
-        launch.imported_t = DateTime.now.strftime("%d/%m/%Y - %H:%M:%S")
-        launch.import_status = 'published'
-      else
-        Rails.logger("####### Erro when creating launcher. Id: #{data['id']}, Name: #{data['name']}")
-      end
-    end
+    Rails.logger("####### Erro when creating launcher. Id: #{launcher_data['id']}, Name: #{launcher_data['name']}")
+  end
 
-    { successful: true, next_page: launchers_data['next'] }
+  def update_launcher
+    attributes = launcher_data.except('id', 'slug')
+    code = Digest::MD5.hexdigest(launcher_data.to_json)
+    attributes.merge!{"last_import_code" => code }
+
+    return if @launcher.update(attributes)
+
+    Rails.logger("####### Erro when updating launcher. Id: #{launcher_data['id']}, Name: #{launcher_data['name']}")
   end
 end
