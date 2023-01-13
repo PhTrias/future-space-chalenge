@@ -6,8 +6,8 @@ module Launchers
       @client = Launchers::Client.new
     end
 
-    def import_data(params)
-      @client.get(params)
+    def import_data(url, params)
+      @client.get(url, params)
     end
   end
 end
