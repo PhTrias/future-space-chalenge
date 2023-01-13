@@ -1,7 +1,7 @@
 module Api
   module V1
     class LaunchersController < Api::ApiController
-      # before_action :authenticate_token!
+      before_action :authenticate_token!
       before_action :set_launch, only: [:show, :update, :destroy]
 
       # GET api/v1/
