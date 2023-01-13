@@ -1,20 +1,15 @@
 module Api
   class ApiController < ActionController::API
-    protect_from_forgery
-    before_action :authenticate_token!
-    skip_forgery_protection
+    include ActionController::HttpAuthentication::Token::ControllerMethods
 
     def authenticate_token!
       authenticate_or_request_with_http_token do |token, options|
         token = Token.all.select { |t| ActiveSupport::SecurityUtils.secure_compare(t.key, token) }
 
-        if token.present?
-          @user = token.first.user
-          return @user
-        end
+        return if token.present?
 
         render(
-          json: { successful: false, error: I18n.t("api.token.invalid_token") },
+          json: { successful: false, error: I18n.t("token.invalid_token") },
           status: :unauthorized
         )
       end
