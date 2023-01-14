@@ -13,6 +13,8 @@ class ImportLaunchersService < ApplicationService
 
     create_launcher if @launcher.new_record?
     update_launcher if @launcher.need_update?(launcher_data.to_json)
+
+    { message: "No create or update needed" }
   end
 
   private
@@ -22,9 +24,10 @@ class ImportLaunchersService < ApplicationService
     @launcher.attributes = attributes
     @launcher.last_import_code = Digest::MD5.hexdigest(launcher_data.to_json)
 
-    return if @launcher.save
+    return { successful: true, method: :create } if @launcher.save
 
-    Rails.logger("####### Erro when creating launcher. Id: #{launcher_data['id']}, Name: #{launcher_data['name']}")
+    Rails.logger.info("####### Erro when creating launcher. Id: #{launcher_data['id']}, ERROR: #{@launcher.errors.full_messages}")
+    { successful: false, method: :create }
   end
 
   def update_launcher
@@ -32,8 +35,9 @@ class ImportLaunchersService < ApplicationService
     code = Digest::MD5.hexdigest(launcher_data.to_json)
     attributes.merge!{"last_import_code" => code }
 
-    return if @launcher.update(attributes)
+    return { successful: true, method: :update } if @launcher.update(attributes)
 
-    Rails.logger("####### Erro when updating launcher. Id: #{launcher_data['id']}, Name: #{launcher_data['name']}")
+    Rails.logger.info("####### Erro when updating launcher. Id: #{launcher_data['id']}, ERROR: #{@launcher.errors.full_messages}")
+    { successful: false, method: :update }
   end
 end
