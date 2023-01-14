@@ -22,6 +22,12 @@ gem 'sidekiq', '~> 6.5.1'
 
 gem 'whenever'
 
+gem 'rswag'
+# Gemfile
+gem 'rswag-api'
+gem 'rswag-ui'
+
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -54,6 +60,8 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'rswag-specs'
 
 end
 
