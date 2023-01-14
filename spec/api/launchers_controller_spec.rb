@@ -12,7 +12,6 @@ describe Api::V1::LaunchersController do
       it 'return a message' do
         get '/api/v1/', headers: { Authorization: "Token #{key}" }
 
-
         expect(JSON.parse(response.body)).to eq({"message" => "REST Back-end Challenge 20201209 Running"})
       end
     end
