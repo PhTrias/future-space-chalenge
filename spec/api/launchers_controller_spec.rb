@@ -47,11 +47,10 @@ describe Api::V1::LaunchersController do
           post(
             '/api/v1/launchers', headers: { Authorization: "Token #{key}" },
             params: {
-              launch: {
-                name: 'Launcher Test',
-                slug: 'Super Launcher Test',
-                url: 'http://localhost:3000.com',
-              }
+              name: 'Launcher Test',
+              slug: 'Super Launcher Test',
+              import_status: 'draft',
+              url: 'http://localhost:3000.com'
             }
           )
         }.to change(Launch, :count).by(1)
@@ -59,7 +58,7 @@ describe Api::V1::LaunchersController do
     end
 
     context 'when incorrect params was send' do
-      let(:invalid_params) { { launch: { invalid_params: "invalid" } } }
+      let(:invalid_params) { { invalid_params: "invalid" } }
 
       it 'doesn\'t creates a launch' do
         post '/api/v1/launchers', params: invalid_params, headers: { Authorization: "Token #{key}" }
@@ -74,11 +73,9 @@ describe Api::V1::LaunchersController do
     context 'when corret params was send' do
       let(:update_params) do
         {
-          launch: {
-            name: 'Launch Update',
-            slug: 'Super Launch Update',
-            phone: 'http://update.com',
-          }
+          name: 'Launch Update',
+          slug: 'Super Launch Update',
+          phone: 'http://update.com',
         }
       end
 
@@ -93,10 +90,8 @@ describe Api::V1::LaunchersController do
     context 'when incorrect params was send' do
       let(:invalid_update_params) do
         {
-          launch: {
-            id: launch.id.to_s,
-            name: "",
-          }
+          id: launch.id.to_s,
+          name: "",
         }
       end
 
