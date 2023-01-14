@@ -10,6 +10,8 @@
 
 4. run `rake db:create db:migrate`
 
+5. run `whenever --update-crontab`
+
 after clone the project and run the dependencies, we can start!
 
 # Running the challenge
