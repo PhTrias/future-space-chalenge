@@ -4,11 +4,11 @@ class Launch < ApplicationRecord
 
   validates :name, presence: true
 
-  enum import_status: ["draft", "trash", "published"]
+  enum import_status: ["draft", "trash", "published"], _default: 'draft'
 
   def save_import_date_and_status
     self.imported_t = DateTime.now
-    self.import_status = 'published'
+    self.import_status = 'published' if self.import_status.nil?
   end
 
   def need_update?(data)
