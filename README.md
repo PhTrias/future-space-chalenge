@@ -48,10 +48,6 @@ With the server running, open another terminal tab and run: `curl -i -X GET 'htt
 
 Doing this, you be able to use the api! Remember use the authentication header to autenthicate: `-H 'Authentication: Token your_token_here'`
 
-# Api endpoint
-
-Following the OpenApi 3.0 definitions, you can read the api documentation in https://editor.swagger.io/ pasting the `swagger.yml` file in the code editor on left.
-
 # Running Specs
 
 To run the Rspec Tests, open a tab in terminal and run:
