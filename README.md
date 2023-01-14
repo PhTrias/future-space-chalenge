@@ -50,6 +50,17 @@ With the server running, open another terminal tab and run: `curl -i -X GET 'htt
 
 Doing this, you be able to use the api! Remember use the authentication header to autenthicate: `-H 'Authentication: Token your_token_here'`
 
+# [Open API 3.0 Documentation]
+To access the API Doc, you need to follow the next steps.
+
+In terminal, in the project repository, run: `rails s`. This command will start the server.
+
+Access `http://localhost:3000/api-docs/index.html`.
+
+> Note: You can access the api to return objects clicking on `Try it out`, but you need some DB objects to test with db connected. You can run `rake launchers:import_data` to get launchers for test.
+
+To test api with authentication, access `Tokens`, get yout token running `Try it out` -> `Execute`. Use the token to Authenticate at the beginning of page on `Authorize` 
+
 # Running Specs
 
 To run the Rspec Tests, open a tab in terminal and run:
@@ -58,6 +69,7 @@ To run the Rspec Tests, open a tab in terminal and run:
 2. `bundle exec rspec  ./spec/models/` ~> Models specs
 3. `bundle exec rspec  ./spec/api/` ~> Api controllers specs
 4. `bundle exec rspec  ./spec/services/` ~> Services specs
+5. `bundle exec rspec  ./spec/requests/` ~> Swagger api specs
 
 
 ## Ruby version
