@@ -56,7 +56,7 @@ To run the Rspec Tests, open a tab in terminal and run:
 
 1. `bundle exec rspec  ./spec/` ~> All specs at once
 2. `bundle exec rspec  ./spec/models/` ~> Models specs
-3. `bundle exec rspec  ./spec/requests/` ~> Api controllers specs
+3. `bundle exec rspec  ./spec/api/` ~> Api controllers specs
 4. `bundle exec rspec  ./spec/services/` ~> Services specs
 
 
