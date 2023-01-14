@@ -1,5 +1,5 @@
 # Future Space Inc Challenge!
-### Code challenge to show my habilities with ruby on rails, RestAPI, Clean Code, Async Jobs and Rspec Tests
+### Code challenge to show my habilities with ruby on rails, RestAPI, Clean Code, Async Jobs, OpenAPI documentation and Rspec Tests
 
 # How to install the project
 1. run `git clone git@github.com:PhTrias/future-space-chalenge.git`
