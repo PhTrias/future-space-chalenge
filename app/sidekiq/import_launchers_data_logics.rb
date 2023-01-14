@@ -18,7 +18,7 @@ module ImportLaunchersDataLogics
 
     service_response['results'].each do |launcher_data|
       response = ImportLaunchersService.call(launcher_data.deep_stringify_keys!)
-      import_counters[response[:method]] += 1 if response[:successful] == true
+      import_counters[response[:method]] += 1 if response&.[](:successful) == true
     end
 
     @url = service_response['next']
