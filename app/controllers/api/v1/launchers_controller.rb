@@ -72,16 +72,15 @@ module Api
       private
 
       def set_launch
-        @launch = Launch.find(params[:id])
+        @launch = Launch.where(params[:id]).first
 
         return @launch if @launch.present?
 
-        render json: { successful: false, error: I18n.t("launch.not_found"), status: :not_found }
+        render json: { successful: false, error: I18n.t("launch.not_found") }, status: :not_found
       end
 
       def launch_params
         params
-          .require(:launch)
           .permit(
             :url,
             :launch_library_id,
@@ -101,6 +100,8 @@ module Api
             :image,
             :infographic,
             :imported_t,
+            :import_id,
+            :last_import_code,
             :import_status,
             :launch_service_provider,
             :mission,
