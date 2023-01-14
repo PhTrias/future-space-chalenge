@@ -50,7 +50,7 @@ With the server running, open another terminal tab and run: `curl -i -X GET 'htt
 
 Doing this, you be able to use the api! Remember use the authentication header to autenthicate: `-H 'Authentication: Token your_token_here'`
 
-# [Open API 3.0 Documentation]
+# Open API 3.0 Documentation
 To access the API Doc, you need to follow the next steps.
 
 In terminal, in the project repository, run: `rails s`. This command will start the server.
