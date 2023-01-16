@@ -72,5 +72,19 @@ To run the Rspec Tests, open a tab in terminal and run:
 5. `bundle exec rspec  ./spec/requests/` ~> Swagger api specs
 
 
-## Ruby version
-  3.0.2
+# Stacks
+### 1. Ruby
+  ### version - 3.0.2
+### 2. Rails
+  ### version - 7.0.4
+### 3. Sidekiq
+  ### version - 6.5.1
+### 4. Rspec
+    rspec-core version - 3.12.0
+    rspec-expectations version - 3.12.2
+    rspec-mocks version - 3.12.2
+    rspec-rails version - 6.0.1
+    rspec-support version - 3.12.0
+### 4. Rswag (specs, api)
+  ### Latest version
+
